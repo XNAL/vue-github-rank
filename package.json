@@ -10,9 +10,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",
     "koa-logger": "^3.0.1",
+    "superagent": "^3.6.0",
     "vue": "^2.4.2",
     "vue-router": "^2.7.0"
   },
