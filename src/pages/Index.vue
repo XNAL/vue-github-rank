@@ -1,7 +1,6 @@
 <template>
     <div class="index">
-        <rank-header :header-title="headerTitle" @show-menu="showMenu"></rank-header>
-        <rank-menu :is-show="isShowMenu"></rank-menu>
+        <rank-header :header-title="headerTitle"></rank-header>
         <div class="main">
             <h3 class="title">说明</h3>
             <p class="content">本项目数据来源于Github网站，使用Node.js定时爬取网站数据，前端页面使用Vue.js开发。本项目只适用于相互交流学习。欢迎大家star和fork。</p>
@@ -25,23 +24,15 @@
 
 <script>
 import header from '../components/Header';
-import menu from '../components/Menu';
 
 export default {
     name: 'index',
     components: {
-        "rank-header": header,
-        "rank-menu":menu
+        "rank-header": header
     },
     data() {
         return {
-            headerTitle: '关于',
-            isShowMenu: false
-        }
-    },
-    methods: {
-        showMenu: function() {
-            this.isShowMenu = true;
+            headerTitle: '关于'
         }
     }
 }
