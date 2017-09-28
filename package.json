@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "cheerio": "^1.0.0-rc.2",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.2.1",

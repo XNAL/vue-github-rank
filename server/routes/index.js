@@ -1,6 +1,6 @@
 const router =  require('koa-router')();
-const works = require('../api/controllers/works/index.js');
+const rank = require('../api/rank');
 
-router.use('/work', works.routes(), works.allowedMethods());
+router.use('/api/rank', rank.routes(), rank.allowedMethods());
 
 module.exports = router;
