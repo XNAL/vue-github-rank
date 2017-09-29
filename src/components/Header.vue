@@ -62,6 +62,7 @@ header {
     color: #fff;
     background: #45BDF6;
     letter-spacing: 2px;
+    z-index: 999;
 
     .header-icon {
         width: 24px;
