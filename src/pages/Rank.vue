@@ -1,14 +1,17 @@
 <template>
     <div class="rank" ref="list">
         <rank-header :header-title="headerTitle"></rank-header>
-        <rank-list :data-list="rankList" v-if="rankList.length > 0"></rank-list>
-        <loading v-if="isShowLoading"></loading>
+        <rank-list :data-list="rankList" v-if="type.toLowerCase() !== 'china' && rankList.length > 0"></rank-list>
+        <user-list :data-list="rankList" v-if="type.toLowerCase() === 'china' && rankList.length > 0"></user-list>
+        <div class="no-more" v-if="!isShowLoading">- 没有更多了 -</div>
+        <loading v-show="isShowLoading"></loading>
     </div>
 </template>
 
 <script>
 import header from '../components/Header';
 import list from '../components/List';
+import userList from '../components/UserList';
 import loading from '../components/Loading';
 import api from '../fetch/api';
 
@@ -17,16 +20,19 @@ export default {
     components: {
         'rank-header': header,
         'rank-list': list,
+        'user-list': userList,
         loading
     },
     data() {
         return {
             isShowLoading: true,
             headerTitle: '',
+            type: '',
             rankList: [],
             page: 1,
+            pageNum: 20,
             isEnding: false,
-            $body: null,
+            $docElement: null,
             $list: null,
             clientHeight: 0
         }
@@ -34,45 +40,63 @@ export default {
     watch: {
         '$route': function() {
             this.isEnding = false;
+            this.isShowLoading = true;
+            this.page = 1;
             this.rankList = [];
+            this.type = this.$route.params.type;
+            this.setHeaderTitle();
             this.getDataList();
         }
     },
     created() {
+        this.type = this.$route.params.type;
+        this.setHeaderTitle();
         this.getDataList();
     },
     mounted: function() {
-        this.$body = document.body;
-        this.clientHeight = this.$body.clientHeight;
+        this.$docElement = document.documentElement;
+        this.clientHeight = document.body.clientHeight;
         this.$list = this.$refs.list;
         window.addEventListener('scroll', this.debounce(this.loadMore));
     },
     methods: {
         getDataList() {
-            this.headerTitle = this.$route.params.type;
-            this.isShowLoading = true;
-
-            api.getStars(this.$route.params.type, this.page)
-                .then(data => {
-                    if (data.length < 10) {
-                        this.isEnding = true;
-                    }
-                    this.rankList.push(...data);
-                    // this.rankList = data;
-                    this.isShowLoading = false;
-                });
+            if (this.type.toLowerCase() === 'china') {
+                api.getChina(this.page)
+                    .then(data => {
+                        if (data.length < this.pageNum) {
+                            this.isEnding = true;
+                            this.isShowLoading = false;
+                        }
+                        this.rankList.push(...data);
+                    });
+            } else {
+                api.getStars(this.$route.params.type, this.page)
+                    .then(data => {
+                        if (data.length < this.pageNum) {
+                            this.isEnding = true;
+                            this.isShowLoading = false;
+                        }
+                        this.rankList.push(...data);
+                    });
+            }
+        },
+        setHeaderTitle() {
+            if (this.type.toLowerCase() === 'china') {
+                this.headerTitle = '中国区100大神';
+            } else {
+                this.headerTitle = this.type;
+            }
         },
         loadMore: function() {
-            let scrollTop = this.$body.scrollTop;
+            let scrollTop = this.$docElement.scrollTop;
             let offsetHeight = this.$list.offsetHeight;
-            console.log(document.body.scrollTop, offsetHeight, this.clientHeight);
             if (offsetHeight - scrollTop - this.clientHeight < 160) {
                 if (this.isEnding === true) {
                     return;
                 }
-                console.log(this.page);
                 this.page++;
-                // this.isLoading = true;
+                this.isShowLoading = true;
                 this.getDataList();
             }
         },
@@ -99,6 +123,11 @@ export default {
 <style lang="scss" scoped>
 .rank {
     padding-top: 40px;
+
+    .no-more {
+        line-height: 32px;
+        text-align: center;
+    }
 }
 </style>
 

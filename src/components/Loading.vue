@@ -25,7 +25,7 @@ export default {
     width: 20px;
     height: 20px;
     position: relative;
-    margin: auto;
+    margin: 6px auto;
     span {
         display: inline-block;
         width: 4px;

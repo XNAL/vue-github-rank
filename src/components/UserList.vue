@@ -2,26 +2,24 @@
     <section class="list-component">
         <ul class="ul-list" v-if="dataList.length > 0">
             <li class="list-li" v-for="data in dataList" :key="data.id">
+                <a class="avatar" :href="data.username | gitAddress">
+                    <img :src="data.avatar" alt="用户头像">
+                </a>
                 <p class="names">
-                    <a :href="data.projectname | gitAddress">
-                        {{ data.projectname }}
+                    <a class="user-name" :href="data.username | gitAddress">
+                        {{ data.username }}
                     </a>
+                    <span class="nick-name">{{ data.nickname }}</span>
                 </p>
                 <p class="desc">
                     {{ data.introduction }}
                 </p>
-                <p class="time">
+                <p class="location">
                     <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-time"></use>
+                        <use xlink:href="#icon-location"></use>
                     </svg>
-                    {{ data.updatetime }}
+                    {{ data.location }}
                 </p>
-                <i class="stars">
-                    {{ data. stars }}
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-star"></use>
-                    </svg>
-                </i>
             </li>
         </ul>
     </section>
@@ -49,28 +47,42 @@ export default {
 <style lang="scss" scoped>
 .list-li {
     position: relative;
-    padding: 0 20px 10px;
+    padding: 0 20px 10px 80px;
     border-bottom: 1px solid #ddd;
-
+    .avatar {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        img {
+            width: 48px;
+            height: 48px;
+        }
+    }
     .names {
         margin: 10px 60px 10px 0;
         font-size: 16px;
-        color: #45BDF6;
         word-wrap: break-word;
+
+        .user-name {
+            color: #45BDF6;
+        }
+        .nick-name {
+            margin-left: 5px;
+        }
     }
     .desc,
-    .time {
+    .location {
         color: #666;
         font-size: 14px;
         line-height: 18px;
     }
-    .time {
+    .location {
         margin-top: 5px;
         color: #999;
         svg.icon {
-            height: 16px;
-            width: 16px;
-            vertical-align: -3px; // margin-right: 2px;
+            height: 18px;
+            width: 18px;
+            vertical-align: -4px;
         }
     }
     i.stars {
