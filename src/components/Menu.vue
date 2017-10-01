@@ -1,7 +1,14 @@
 <template>
     <div class="mask" @click="$emit('hide-menu')" v-if="isShow">
         <div class="menu" v-if="isShow">
-            <h3 class="category">分类选项</h3>
+            <div class="don-info">
+                <a href="https://github.com/XNAL">
+                    <img src="../assets/don.jpg" alt="" class="don-logo">
+                    <p class="don">Develop by
+                        <span>Don</span>
+                    </p>
+                </a>
+            </div>
             <ul class="language-list">
                 <li class="language">
                     <router-link :to="{name: 'Rank', params: {type: 'China'}}">中国区100大神</router-link>
@@ -42,9 +49,6 @@
                 <li class="language">
                     <router-link :to="{name: 'Rank', params: {type: 'C#'}}">C#</router-link>
                 </li>
-                <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'Objective-C'}}">Objective-C</router-link>
-                </li>
             </ul>
         </div>
     </div>
@@ -71,7 +75,7 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0); 
+    background: rgba(0, 0, 0, 0);
     z-index: 9998;
 }
 
@@ -87,21 +91,35 @@ export default {
     width: 160px;
     color: #333;
 
-    .category {
-        height: 40px;
-        line-height: 40px;
-        background: #45BDF6;
-        color: #fff;
-        text-align: center;
-        letter-spacing: 2px;
+    .don-info {
+        position: relative;
+        .don-logo {
+            width: 100%;
+        }
+        p.don {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            color: #aaa;
+            span {
+                font-size: 16px;
+                color: #fff;
+            }
+        }
     }
 
     .language-list {
         .language {
             line-height: 40px;
-            padding-left: 20px;
+            padding-left: 30px;
             border-bottom: 1px solid #ddd;
             letter-spacing: 2px;
+
+            a {
+                display: inline-block;
+                height: 100%;
+                width: 100%;
+            }
         }
     }
 }

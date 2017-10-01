@@ -20,6 +20,12 @@
                     </svg>
                     {{ data.location }}
                 </p>
+                <i class="rank">
+                    {{ data.ordernum }}
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-rank"></use>
+                    </svg>
+                </i>
             </li>
         </ul>
     </section>
@@ -85,10 +91,12 @@ export default {
             vertical-align: -4px;
         }
     }
-    i.stars {
+    i.rank {
         position: absolute;
-        top: 0;
+        bottom: 10px;
         right: 20px;
+        color: #4cb549;
+        font-size: 16px;
 
         svg.icon {
             height: 18px;

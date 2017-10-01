@@ -34,9 +34,8 @@ export default async(url = '', params = {}, method = 'get') => {
             paramArr.push(key + '=' + value);
         }
         if (paramArr.length > 0) {
-            url += '?' + paramArr.join('&');
+            url += '?' + paramArr.join('&').replace(/#/g, '%23');
         }
-
         return new Promise((resolve, reject) => {
             axios.get(url)
                 .then(response => {

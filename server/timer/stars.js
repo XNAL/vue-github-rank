@@ -7,7 +7,7 @@ const sqlQuery = require('../config/mysql-async');
 
 // 根据网站api得到相应的url和参数
 const reqUrl = 'https://github.com/search';
-const filter = ' stars:>500';
+const filter = ' stars:>1000';
 const reqParams = {
     "l": "TypeScript",
     "o": "desc",

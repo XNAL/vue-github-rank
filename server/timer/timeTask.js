@@ -1,6 +1,6 @@
 const follower = require('./follower');
 const stars = require('./stars');
-const types = ['JavaScript', 'TypeScript', 'HTML', 'CSS', 'Python', 'CoffeeScript', 'PHP', 'Ruby', 'Java', 'C', 'C++', 'C#', 'Objective-C'];
+const types = ['JavaScript', 'TypeScript', 'HTML', 'CSS', 'Python', 'CoffeeScript', 'PHP', 'Ruby', 'Java', 'C', 'C++', 'C#'];
 
 
 // 启动时直接执行代码 

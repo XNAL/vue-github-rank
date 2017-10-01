@@ -69,6 +69,7 @@ export default {
                             this.isShowLoading = false;
                         }
                         this.rankList.push(...data);
+                        this.isCurrentPageEnd = true;
                     });
             } else {
                 api.getStars(this.$route.params.type, this.page)
@@ -127,6 +128,7 @@ export default {
     .no-more {
         line-height: 32px;
         text-align: center;
+        color: #999;
     }
 }
 </style>
