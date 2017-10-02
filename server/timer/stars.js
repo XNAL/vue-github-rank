@@ -19,38 +19,54 @@ const reqParams = {
 };
 
 async function mostStars(type) {
+    console.log(`开始进行${type}数据的获取：`);
     reqParams.l = type;
     reqParams.q = type + filter;
-    
+
     let starsData = [];
     let pageIndex = 1;
+    let errTotal = 0,
+        isAlwaysErr = false,
+        errPage = 0;
     while (pageIndex <= config.timer.pageTotal) {
         let result = await getStarsData(pageIndex, starsData.length);
         if (result.success === true) {
+            errTotal = 0;
             if (result.data.length === 0) {
                 pageIndex = config.timer.pageTotal + 1;
             } else {
                 pageIndex++;
                 starsData.push(...result.data);
             }
+        } else {
+            errTotal++;
+        }
+
+        if (errTotal >= 50) {
+            isAlwaysErr = true;
+            errPage = pageIndex;
+            pageIndex = config.timer.pageTotal + 1;
         }
     }
-
-    let delResult = await sqlQuery(`delete from stars_rank where type = '${type}'`);
-    let sql = 'INSERT INTO stars_rank (projectname, introduction, topics, updatetime, stars, ordernum, type) VALUES';
-    for (let {
-            projectname,
-            introduction,
-            topics,
-            updatetime,
-            stars,
-            ordernum
-        } of Object.values(starsData)) {
-        sql += `('${projectname}', '${introduction}', '${topics}', '${updatetime}', '${stars}', ${ordernum}, '${type}'), `;
+    if (!isAlwaysErr) {
+        let delResult = await sqlQuery(`delete from stars_rank where type = '${type}'`);
+        let sql = 'INSERT INTO stars_rank (projectname, introduction, topics, updatetime, stars, ordernum, type) VALUES';
+        for (let {
+                projectname,
+                introduction,
+                topics,
+                updatetime,
+                stars,
+                ordernum
+            } of Object.values(starsData)) {
+            sql += `('${projectname}', '${introduction}', '${topics}', '${updatetime}', '${stars}', ${ordernum}, '${type}'), `;
+        }
+        sql = sql.substring(0, sql.length - 2);
+        let sqlResult = await sqlQuery(sql)
+        console.log(`${type}数据的获取成功：`, sqlResult);
+    } else {
+        console.log(`${type}请求第${errPage}页数据错误超过50次，此次操作跳过此分类的取值。`);
     }
-    sql = sql.substring(0, sql.length - 2);
-    let sqlResult = await sqlQuery(sql)
-    console.log(type, sqlResult);
 }
 
 async function getStarsData(pageIndex, currentOrder) {
@@ -59,7 +75,7 @@ async function getStarsData(pageIndex, currentOrder) {
     try {
         result = await helper.fetch_data_get(reqUrl, reqParams);
     } catch (err) {
-        console.log('获取链接失败：', err);
+        console.log(`获取${reqParams.l}的第${pageIndex}页面数据失败.`);
         return {
             success: false,
             data: null

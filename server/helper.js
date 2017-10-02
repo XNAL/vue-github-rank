@@ -1,5 +1,3 @@
-// const log_debug = require('debug')('dev');
-// exports.log_debug = log_debug;
 const superagent = require('superagent');
 const config = require('./config/config');
 

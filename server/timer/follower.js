@@ -17,6 +17,7 @@ const reqParams = {
 };
 
 async function mostFollowers() {
+    console.log('开始进行中国区100大神数据的获取：');
     let userData = [];
     let pageIndex = 1;
     while (pageIndex <= config.timer.pageTotal) {
@@ -41,7 +42,7 @@ async function mostFollowers() {
     }
     sql = sql.substring(0, sql.length - 2);
     let sqlResult = await sqlQuery(sql)
-    console.log(sqlResult);
+    console.log('中国区100大神数据获取完成：', sqlResult);
 }
 
 async function getUserData(pageIndex, currentOrder) {
@@ -50,7 +51,7 @@ async function getUserData(pageIndex, currentOrder) {
     try {
         result = await helper.fetch_data_get(reqUrl, reqParams);
     } catch (err) {
-        console.log('获取链接失败：', err);
+        console.log(`获取中国区100大神的第${pageIndex}页面数据失败.`);
         return {
             success: false,
             data: null

@@ -4,6 +4,9 @@ const query = require('./config/mysql-async.js');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const task = require('./timer/timeTask');
+
+task.timeTask();
 
 app.use(async(ctx, next) => {
   ctx.execSql = query;
