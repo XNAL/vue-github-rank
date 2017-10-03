@@ -84,7 +84,7 @@ export default {
         },
         setHeaderTitle() {
             if (this.type.toLowerCase() === 'china') {
-                this.headerTitle = '中国区100大神';
+                this.headerTitle = '中国区前100大神';
             } else {
                 this.headerTitle = this.type;
             }

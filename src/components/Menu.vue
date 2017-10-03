@@ -11,7 +11,7 @@
             </div>
             <ul class="language-list">
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'China'}}">中国区100大神</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'China'}}">中国区前100大神</router-link>
                 </li>
                 <li class="language">
                     <router-link :to="{name: 'Rank', params: {type: 'JavaScript'}}">JavaScript</router-link>

@@ -5,7 +5,7 @@ const bodyParser = require('koa-bodyparser');
 const resource = require('koa-static');
 const path = require('path');
 const logger = require('koa-logger');
-const config = require('./environment/index.js');
+const config = require('./config');
 
 const app = new Koa();
 
@@ -13,8 +13,5 @@ const app = new Koa();
 app.use(bodyParser());
 app.use(koaJson());
 app.use(resource(path.join(config.root, config.appPath)));
-if(app.env === 'development') {
-  app.use(logger());
-}
 
 module.exports = app;

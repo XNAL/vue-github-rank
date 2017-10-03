@@ -1,29 +1,20 @@
 // Development specific configuration
 // ==================================
+var path = require('path');
+
 module.exports = {
 	db: {
-		mongo: {
-			uri: 'mongodb://localhost/work'
-		},
-		mysql: {
-			host: 'localhost',
-			user: 'root',
-			password: '',
-			database: 'mysql',
-			connectionLimit: 10
-		},
-		redis: {
-			port: 6379,
-			//host: '127.0.0.1',
-			host: '172.16.45.254',
-			db: 10,
-			options: {
-				return_buffers: false,
-				//auth_pass: 'GuangtianTuringCatGood'
-			}
-		},
+        mysql: {
+            host     : '127.0.0.1',
+            user     : 'root',
+            password : '123456',
+            database : 'github_rank',
+            connectionLimit:10
+        }
 	},
-	port: 8081,
+    root: path.normalize(__dirname + '/../../..'),
+    appPath:"src",
+	port: 9000,
     timer: {
         timeout: 100,			//ajax 时间间隔
         asyncNum: 5,			//并发数目限制
