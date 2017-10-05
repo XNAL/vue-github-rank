@@ -1,6 +1,6 @@
 import async from './fetch';
 
-const baseUrl = '/api/rank';
+const baseUrl = '/rankapi/rank';
 
 export default {
     getChina(page = 1, pageNum = 20) {

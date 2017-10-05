@@ -28,11 +28,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {      
-      '/api': {
+      '/rankapi': {
         target: 'http://localhost:9000',
         changeOrigin: true,
         pathRewrite: {                //需要rewrite重写的, 如果在服务器端做了处理则可以不要这段
-          '^/api': '/api'
+          '^/rankapi': '/rankapi'
         }   
       }
     },
