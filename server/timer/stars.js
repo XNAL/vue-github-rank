@@ -50,7 +50,7 @@ async function mostStars(type) {
     }
     if (!isAlwaysErr) {
         let delResult = await sqlQuery(`delete from stars_rank where type = '${type}'`);
-        let sql = 'INSERT INTO stars_rank (projectname, introduction, topics, updatetime, stars, ordernum, type) VALUES';
+        let sql = 'INSERT INTO stars_rank (projectname, introduction, topics, updatetime, stars, ordernum, type, crawlingtime) VALUES';
         for (let {
                 projectname,
                 introduction,
@@ -59,7 +59,7 @@ async function mostStars(type) {
                 stars,
                 ordernum
             } of Object.values(starsData)) {
-            sql += `('${projectname}', '${introduction}', '${topics}', '${updatetime}', '${stars}', ${ordernum}, '${type}'), `;
+            sql += `('${projectname}', '${introduction}', '${topics}', '${updatetime}', '${stars}', ${ordernum}, '${type}', NOW()), `;
         }
         sql = sql.substring(0, sql.length - 2);
         let sqlResult = await sqlQuery(sql)

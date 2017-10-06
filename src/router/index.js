@@ -6,7 +6,8 @@ import Rank from '@/pages/Rank'
 Vue.use(Router)
 
 export default new Router({
-	mode: 'history',
+  base: '/vue-github-rank/',
+	// mode: 'history',
   routes: [
     {
       path: '/',

@@ -7,14 +7,20 @@ const moment = require('moment');
 exports.timeTask = function () {
     var rule = new schedule.RecurrenceRule();
     // 本地测试使用，每半小时执行一次
-    // var times = [];　　
-    // for (var i = 1; i < 25; i++) {　　　　
+    // let times = [];　　
+    // for (let i = 1; i < 25; i++) {　　　　
     //     times.push(i);　　
     // }
     // rule.minute = [20, 50];
 
-    // 上线使用，每隔6小时执行一次
-    schedule.scheduleJob('0 0 0/6 * * ?', async function () {
+    let times = [];　　
+    for (let i = 0; i < 12; i++) {　　　　
+        times.push(i * 2);　　
+    }
+    rule.hour = times;
+    rule.minute = 0;
+    // 上线使用，每隔2小时执行一次
+    schedule.scheduleJob(rule, async function () {
         console.log('定时任务开始执行!', moment().format('YYYY-MM-DD HH:mm:ss'));
         // 获取最多follower的中国区大神
         await follower.mostFollowers();

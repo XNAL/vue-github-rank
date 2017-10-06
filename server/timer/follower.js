@@ -29,7 +29,7 @@ async function mostFollowers() {
     }
 
     let delResult = await sqlQuery('delete from user_rank');
-    let sql = 'INSERT INTO user_rank (username, nickname, avatar, introduction, location, ordernum) VALUES';
+    let sql = 'INSERT INTO user_rank (username, nickname, avatar, introduction, location, ordernum, crawlingtime) VALUES';
     for (let {
             username,
             nickname,
@@ -38,11 +38,11 @@ async function mostFollowers() {
             location,
             ordernum
         } of Object.values(userData)) {
-        sql += `('${username}', '${nickname}', '${avatar}', '${introduction}', '${location}', ${ordernum}), `;
+        sql += `('${username}', '${nickname}', '${avatar}', '${introduction}', '${location}', ${ordernum}, NOW()), `;
     }
     sql = sql.substring(0, sql.length - 2);
     let sqlResult = await sqlQuery(sql)
-    console.log('中国区100大神数据获取完成：', sqlResult);
+    console.log('中国区前100大神数据获取完成：', sqlResult);
 }
 
 async function getUserData(pageIndex, currentOrder) {
