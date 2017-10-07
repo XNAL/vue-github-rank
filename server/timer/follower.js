@@ -20,29 +20,46 @@ async function mostFollowers() {
     console.log('开始进行中国区100大神数据的获取：');
     let userData = [];
     let pageIndex = 1;
+    let errTotal = 0,
+        isAlwaysErr = false,
+        errPage = 0;
     while (pageIndex <= config.timer.pageTotal) {
         let result = await getUserData(pageIndex, userData.length);
         if (result.success === true) {
+            errTotal = 0;
             pageIndex++;
             userData.push(...result.data);
+        } else {
+            errTotal++;
+        }
+
+
+        if (errTotal >= 50) {
+            isAlwaysErr = true;
+            errPage = pageIndex;
+            pageIndex = config.timer.pageTotal + 1;
         }
     }
 
-    let delResult = await sqlQuery('delete from user_rank');
-    let sql = 'INSERT INTO user_rank (username, nickname, avatar, introduction, location, ordernum, crawlingtime) VALUES';
-    for (let {
-            username,
-            nickname,
-            avatar,
-            introduction,
-            location,
-            ordernum
-        } of Object.values(userData)) {
-        sql += `('${username}', '${nickname}', '${avatar}', '${introduction}', '${location}', ${ordernum}, NOW()), `;
+    if (!isAlwaysErr) {
+        let delResult = await sqlQuery('delete from user_rank');
+        let sql = 'INSERT INTO user_rank (username, nickname, avatar, introduction, location, ordernum, crawlingtime) VALUES';
+        for (let {
+                username,
+                nickname,
+                avatar,
+                introduction,
+                location,
+                ordernum
+            } of Object.values(userData)) {
+            sql += `('${username}', '${nickname}', '${avatar}', '${introduction}', '${location}', ${ordernum}, NOW()), `;
+        }
+        sql = sql.substring(0, sql.length - 2);
+        let sqlResult = await sqlQuery(sql)
+        console.log('中国区前100大神数据获取完成：', sqlResult);
+    } else {
+        console.log(`中国区前100大神请求第${errPage}页数据错误超过50次，跳过此次取值。`);
     }
-    sql = sql.substring(0, sql.length - 2);
-    let sqlResult = await sqlQuery(sql)
-    console.log('中国区前100大神数据获取完成：', sqlResult);
 }
 
 async function getUserData(pageIndex, currentOrder) {
