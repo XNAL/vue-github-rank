@@ -54,7 +54,8 @@ export default {
         this.getDataList();
     },
     mounted: function() {
-        this.$docElement = document.documentElement;
+        // this.$docElement = document.documentElement;
+        this.$docElement = document.body;
         this.clientHeight = document.body.clientHeight;
         this.$list = this.$refs.list;
         window.addEventListener('scroll', this.debounce(this.loadMore));
@@ -90,7 +91,8 @@ export default {
             }
         },
         loadMore: function() {
-            let scrollTop = this.$docElement.scrollTop;
+            // let scrollTop = this.$docElement.scrollTop;
+            let scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
             let offsetHeight = this.$list.offsetHeight;
             if (offsetHeight - scrollTop - this.clientHeight < 160) {
                 if (this.isEnding === true) {

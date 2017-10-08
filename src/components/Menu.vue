@@ -3,51 +3,52 @@
         <div class="menu" v-if="isShow">
             <div class="don-info">
                 <a href="https://github.com/XNAL">
-                    <img src="../assets/don.jpg" alt="" class="don-logo">
-                    <p class="don">Develop by
-                        <span>Don</span>
-                    </p>
+                    <img src="../assets/don.png" alt="" class="don-logo">
+                    <div class="don">
+                        <p class="author">Don</p>
+                        <p>Develop by</p>
+                    </div>
                 </a>
             </div>
             <ul class="language-list">
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'China'}}">中国区前100大神</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'China'}}" exact>中国区前100大神</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'JavaScript'}}">JavaScript</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'JavaScript'}}" exact>JavaScript</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'TypeScript'}}">TypeScript</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'TypeScript'}}" exact>TypeScript</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'HTML'}}">HTML</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'HTML'}}" exact>HTML</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'CSS'}}">CSS</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'CSS'}}" exact>CSS</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'Python'}}">Python</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'Python'}}" exact>Python</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'CoffeeScript'}}">CoffeeScript</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'CoffeeScript'}}" exact>CoffeeScript</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'PHP'}}">PHP</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'PHP'}}" exact>PHP</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'Ruby'}}">Ruby</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'Ruby'}}" exact>Ruby</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'Java'}}">Java</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'Java'}}" exact>Java</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'C'}}">C</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'C'}}" exact>C</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'C++'}}">C++</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'C++'}}" exact>C++</router-link>
                 </li>
                 <li class="language">
-                    <router-link :to="{name: 'Rank', params: {type: 'C#'}}">C#</router-link>
+                    <router-link :to="{name: 'Rank', params: {type: 'C#'}}" exact>C#</router-link>
                 </li>
             </ul>
         </div>
@@ -75,7 +76,7 @@ export default {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, .2);
     z-index: 9998;
 }
 
@@ -86,9 +87,9 @@ export default {
     left: 0;
     bottom: 0;
     background: #fff;
-    box-shadow: 1px 0 10px #999;
+    // box-shadow: 1px 0 10px #999;
     z-index: 9999;
-    width: 160px;
+    width: 60%;
     color: #333;
 
     .don-info {
@@ -96,14 +97,15 @@ export default {
         .don-logo {
             width: 100%;
         }
-        p.don {
+        div.don {
             position: absolute;
-            bottom: 5px;
-            right: 10px;
+            bottom: 8px;
+            left: 10px;
             color: #aaa;
-            span {
+            p.author {
                 font-size: 16px;
                 color: #fff;
+                margin-bottom: 8px;
             }
         }
     }
@@ -119,6 +121,10 @@ export default {
                 display: inline-block;
                 height: 100%;
                 width: 100%;
+
+                &.router-link-exact-active {
+                    color: #45BDF6;
+                }
             }
         }
     }

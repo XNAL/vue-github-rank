@@ -59,7 +59,7 @@ async function mostStars(type) {
                 stars,
                 ordernum
             } of Object.values(starsData)) {
-            sql += `('${projectname}', '${introduction}', '${topics}', '${updatetime}', '${stars}', ${ordernum}, '${type}', NOW()), `;
+            sql += `('${projectname}', '${introduction}', '${topics}', from_unixtime(${updatetime}), '${stars}', ${ordernum}, '${type}', NOW()), `;
         }
         sql = sql.substring(0, sql.length - 2);
         let sqlResult = await sqlQuery(sql)
@@ -95,7 +95,7 @@ async function getStarsData(pageIndex, currentOrder) {
             projectname: _this.find('h3 a.v-align-middle').text(),
             introduction: _this.find('p.col-9.d-inline-block').text().trim().replace(/\'/g, '\\\'').replace(/\?/g, ''),
             topics: arrTopic.join(','),
-            updatetime: _this.find('p relative-time').attr('datetime'),
+            updatetime: Date.parse(new Date(_this.find('p relative-time').attr('datetime'))) / 1000,
             stars: _this.find('a.muted-link').text().trim(),
             ordernum: ++currentOrder
         });
