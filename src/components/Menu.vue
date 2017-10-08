@@ -6,7 +6,7 @@
                     <img src="../assets/don.png" alt="" class="don-logo">
                     <div class="don">
                         <p class="author">Don</p>
-                        <p>Develop by</p>
+                        <p>Powered by</p>
                     </div>
                 </a>
             </div>

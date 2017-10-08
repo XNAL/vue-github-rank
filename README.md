@@ -8,7 +8,7 @@
 
 ## 访问地址
 
-- [访问地址：http://www.qdnote.com/vue-github-rank/](http://www.qdnote.com/vue-github-rank/)（pc端开启手机模式浏览更加）
+- [访问地址：http://www.qdnote.com/vue-github-rank/](http://www.qdnote.com/vue-github-rank/)（pc端开启手机模式浏览效果更佳）
 
 - 扫描二维码
 
