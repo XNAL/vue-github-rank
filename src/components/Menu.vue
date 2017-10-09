@@ -87,9 +87,9 @@ export default {
     left: 0;
     bottom: 0;
     background: #fff;
-    // box-shadow: 1px 0 10px #999;
     z-index: 9999;
     width: 60%;
+    max-width: 300px;
     color: #333;
 
     .don-info {
