@@ -14,6 +14,16 @@ function fetch_data_get(url, queryParams) {
 	})
 }
 
+// 休眠函数
+async function sleep(time) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(null);
+        }, time);
+    });
+}
+
 
 exports.fetch_data_get = fetch_data_get;
+exports.sleep = sleep;
 

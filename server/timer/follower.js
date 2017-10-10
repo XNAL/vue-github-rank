@@ -25,12 +25,24 @@ async function mostFollowers() {
         errPage = 0;
     while (pageIndex <= config.timer.pageTotal) {
         let result = await getUserData(pageIndex, userData.length);
+
         if (result.success === true) {
             errTotal = 0;
             pageIndex++;
             userData.push(...result.data);
+
+            // 暂停500ms
+            await helper.sleep(500);
         } else {
             errTotal++;
+            if(errTotal < 15) {
+                // 暂停1s
+                await helper.sleep(1000);
+            } else if(errTotal < 30) {            
+                await helper.sleep(3000);
+            } else {         
+                await helper.sleep(5000);
+            }
         }
 
 
@@ -94,5 +106,6 @@ async function getUserData(pageIndex, currentOrder) {
         data: data
     };
 }
+
 
 exports.mostFollowers = mostFollowers;
