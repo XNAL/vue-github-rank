@@ -33,6 +33,7 @@ export default {
             pageNum: 20,
             isEnding: false,
             $docElement: null,
+            $body: null,
             $list: null,
             clientHeight: 0
         }
@@ -54,9 +55,9 @@ export default {
         this.getDataList();
     },
     mounted: function() {
-        // this.$docElement = document.documentElement;
-        this.$docElement = document.body;
-        this.clientHeight = document.body.clientHeight;
+        this.$docElement = document.documentElement;
+        this.$body = document.body;
+        this.clientHeight = this.$body.clientHeight;
         this.$list = this.$refs.list;
         window.addEventListener('scroll', this.debounce(this.loadMore));
     },
@@ -91,8 +92,7 @@ export default {
             }
         },
         loadMore: function() {
-            // let scrollTop = this.$docElement.scrollTop;
-            let scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
+            let scrollTop = this.$body.scrollTop + this.$docElement.scrollTop;
             let offsetHeight = this.$list.offsetHeight;
             if (offsetHeight - scrollTop - this.clientHeight < 160) {
                 if (this.isEnding === true) {

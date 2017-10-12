@@ -46,9 +46,9 @@ async function mostStars(type) {
                 // 暂停1s
                 await helper.sleep(1000);
             } else if(errTotal < 30) {            
-                await helper.sleep(3000);
-            } else {         
                 await helper.sleep(5000);
+            } else {         
+                await helper.sleep(10000);
             }
         }
 
