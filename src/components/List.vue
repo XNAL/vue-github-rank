@@ -3,7 +3,7 @@
         <ul class="ul-list" v-if="dataList.length > 0">
             <li class="list-li" v-for="(data, index) in dataList" :key="data.id">
                 <p class="names">
-                    <a :href="data.projectname | gitAddress">
+                    <a :href="data.projectname | gitAddress" target="_blank">
                         {{ data.projectname }}
                     </a>
                 </p>

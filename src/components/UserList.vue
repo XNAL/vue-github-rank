@@ -2,11 +2,11 @@
     <section class="list-component">
         <ul class="ul-list" v-if="dataList.length > 0">
             <li class="list-li" v-for="data in dataList" :key="data.id">
-                <a class="avatar" :href="data.username | gitAddress">
+                <a class="avatar" :href="data.username | gitAddress" target="_blank">
                     <img :src="data.avatar" alt="用户头像">
                 </a>
                 <p class="names">
-                    <a class="user-name" :href="data.username | gitAddress">
+                    <a class="user-name" :href="data.username | gitAddress" target="_blank">
                         {{ data.username }}
                     </a>
                     <span class="nick-name">{{ data.nickname }}</span>
