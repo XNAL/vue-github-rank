@@ -79,25 +79,5 @@ exports.timeTask = function () {
             await helper.sleep(60000);
         }
         console.log('类别数组2的数据更新完成！', moment().format('YYYY-MM-DD HH:mm:ss'));
-    });    
-
-    // // 上线使用，每隔2小时执行一次
-    // schedule.scheduleJob(rule, async function () {
-    //     console.log('定时任务开始执行!', moment().format('YYYY-MM-DD HH:mm:ss'));
-    //     // 获取最多follower的中国区大神
-    //     await follower.mostFollowers();
-    //     // 间隔一分钟
-    //     await helper.sleep(60000);
-    //     // 根据类型获取对应的stars排行项目数据
-    //     for (let [idx, type] of Object.entries(types)) {
-    //         await stars.mostStars(type);
-    //         // 每个分类间隔一分钟
-    //         await helper.sleep(60000);
-    //         if(idx % 3 === 0) {
-    //             await helper.sleep(300000);
-    //         }
-    //     }
-    //     console.log('Github数据更新完成！', moment().format('YYYY-MM-DD HH:mm:ss'));
-    // });
-
+    });
 }
