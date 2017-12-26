@@ -8,11 +8,11 @@
 
 ## 访问地址
 
-- [访问地址：http://www.qdnote.com/vue-github-rank/](http://www.qdnote.com/vue-github-rank/)（pc端开启手机模式浏览效果更佳）
+- [访问地址：http://www.tdon.site/vue-github-rank/](http://www.tdon.site/vue-github-rank/)（pc端开启手机模式浏览效果更佳）
 
 - 扫描二维码
 
-<img src="https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/QRcode.png" width="300" height="300"/>
+![二维码](https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/rank-qrcode.png)
 
 ## 如何使用
 
@@ -53,16 +53,16 @@
 
 ### 关于（首页）
 
-<img src="https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/about.png"/>
+![关于（首页）](https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/about.png")
 
 ### 中国区前100大神
 
-<img src="https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/china.png"/>
+![中国区前100大神](https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/china.png")
 
 ### 目录
 
-<img src="https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/menu.png"/>
+![目录](https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/menu.png")
 
 ### 项目
 
-<img src="https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/project.png"/>
+![项目](https://github.com/XNAL/vue-github-rank/blob/master/screenshorts/project.png")
