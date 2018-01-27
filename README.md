@@ -21,7 +21,7 @@
     // 需要先安装mysql，并创建数据库，可参考源码中的`github_rank.sql`
     
     cd vue-github-rank
-    npm init
+    npm install
     
     // 启动node服务
     gulp nodemon 
