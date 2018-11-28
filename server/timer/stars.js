@@ -45,9 +45,9 @@ async function mostStars(type) {
             if(errTotal < 15) {
                 // 暂停1s
                 await helper.sleep(1000);
-            } else if(errTotal < 30) {            
+            } else if(errTotal < 30) {
                 await helper.sleep(5000);
-            } else {         
+            } else {
                 await helper.sleep(10000);
             }
         }
@@ -103,10 +103,10 @@ async function getStarsData(pageIndex, currentOrder) {
         })
         data.push({
             projectname: _this.find('h3 a.v-align-middle').text(),
-            introduction: _this.find('p.col-9.d-inline-block').text().trim().replace(/\'/g, '\\\'').replace(/\?/g, ''),
+            introduction: _this.find('p.col-md-9.d-inline-block').text().trim().replace(/\'/g, '\\\'').replace(/\?/g, ''),
             topics: arrTopic.join(','),
             updatetime: Date.parse(new Date(_this.find('p relative-time').attr('datetime'))) / 1000,
-            stars: _this.find('a.muted-link').text().trim(),
+            stars: _this.find('.pl-2 a.muted-link').text().trim(),
             ordernum: ++currentOrder
         });
     })
