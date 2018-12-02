@@ -70,17 +70,17 @@ export default {
                             this.isEnding = true;
                             this.isShowLoading = false;
                         }
-                        this.rankList.push(...data);
+                        this.rankList.push(...data.items);
                         this.isCurrentPageEnd = true;
                     });
             } else {
                 api.getStars(this.$route.params.type, this.page)
                     .then(data => {
-                        if (data.length < this.pageNum) {
+                        if (data.items.length < this.pageNum || this.page > 10) {
                             this.isEnding = true;
                             this.isShowLoading = false;
                         }
-                        this.rankList.push(...data);
+                        this.rankList.push(...data.items);
                     });
             }
         },

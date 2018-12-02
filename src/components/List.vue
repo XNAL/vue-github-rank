@@ -3,27 +3,27 @@
         <ul class="ul-list" v-if="dataList.length > 0">
             <li class="list-li" v-for="(data, index) in dataList" :key="data.id">
                 <p class="names">
-                    <a :href="data.projectname | gitAddress" target="_blank">
-                        {{ data.projectname }}
+                    <a :href="data.html_url" target="_blank">
+                        {{ data.full_name }}
                     </a>
                 </p>
                 <p class="desc">
-                    {{ data.introduction }}
+                    {{ data.description }}
                 </p>
                 <p class="time">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-time"></use>
                     </svg>
-                    {{ data.updatetime | fromatTime}}
+                    {{ data.updated_at | fromatTime}}
                 </p>
                 <i class="rank">
-                    {{ data.ordernum }}
+                    {{ index + 1 }}
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-rank"></use>
                     </svg>
                 </i>
                 <i class="stars">
-                    {{ data. stars}}
+                    {{ data.stargazers_count}}
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-star"></use>
                     </svg>

@@ -10,21 +10,21 @@ const reqUrl = 'https://github.com/search';
 const reqParams = {
     "o": "desc",
     "p": 1,
-    "q": "location:China",
+    "q": "location:China followers:>1000",
     "s": "followers",
     "type": "Users",
     "utf8": "✓"
 };
 
-async function mostFollowers() {
-    console.log('开始进行中国区100大神数据的获取：');
+async function mostFollowers(type = 'china') {
+    console.log(`开始进行${type === 'all' ? '' : 'china'} 100 most followers 数据的获取：`);
     let userData = [];
     let pageIndex = 1;
     let errTotal = 0,
         isAlwaysErr = false,
         errPage = 0;
     while (pageIndex <= config.timer.pageTotal) {
-        let result = await getUserData(pageIndex, userData.length);
+        let result = await getUserData(pageIndex, userData.length, type);
 
         if (result.success === true) {
             errTotal = 0;
@@ -38,9 +38,9 @@ async function mostFollowers() {
             if(errTotal < 15) {
                 // 暂停1s
                 await helper.sleep(1000);
-            } else if(errTotal < 30) {            
+            } else if(errTotal < 30) {
                 await helper.sleep(5000);
-            } else {         
+            } else {
                 await helper.sleep(10000);
             }
         }
@@ -68,19 +68,22 @@ async function mostFollowers() {
         }
         sql = sql.substring(0, sql.length - 2);
         let sqlResult = await sqlQuery(sql)
-        console.log('中国区前100大神数据获取完成：', sqlResult);
+        console.log(`${type === 'all' ? '' : 'china'} 100 most followers 数据获取完成：`, sqlResult);
     } else {
-        console.log(`中国区前100大神请求第${errPage}页数据错误超过50次，跳过此次取值。`);
+        console.log(`${type === 'all' ? '' : 'china'} 100 most followers 请求第${errPage}页数据错误超过50次，跳过此次取值。`);
     }
 }
 
-async function getUserData(pageIndex, currentOrder) {
+async function getUserData(pageIndex, currentOrder, type) {
     reqParams.p = pageIndex;
+    if(type === 'all') {
+        reqParams.q = 'followers:>1000'
+    }
     let result = '';
     try {
         result = await helper.fetch_data_get(reqUrl, reqParams);
     } catch (err) {
-        console.log(`获取中国区100大神的第${pageIndex}页面数据失败.`);
+        console.log(`获取${type === 'all' ? '' : 'china'} 100 most followers 的第${pageIndex}页面数据失败.`);
         return {
             success: false,
             data: null
