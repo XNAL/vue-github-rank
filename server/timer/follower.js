@@ -17,7 +17,7 @@ const reqParams = {
 };
 
 async function mostFollowers(type = 'china') {
-    console.log(`开始进行${type === 'all' ? '' : 'china'} 100 most followers 数据的获取：`);
+    console.log(`开始进行${type} 100 most followers 数据的获取：`);
     let userData = [];
     let pageIndex = 1;
     let errTotal = 0,
@@ -54,23 +54,20 @@ async function mostFollowers(type = 'china') {
     }
 
     if (!isAlwaysErr) {
-        let delResult = await sqlQuery('delete from user_rank');
-        let sql = 'INSERT INTO user_rank (username, nickname, avatar, introduction, location, ordernum, crawlingtime) VALUES';
-        for (let {
-                username,
-                nickname,
-                avatar,
-                introduction,
-                location,
-                ordernum
-            } of Object.values(userData)) {
-            sql += `('${username}', '${nickname}', '${avatar}', '${introduction}', '${location}', ${ordernum}, NOW()), `;
+        let delResult = await sqlQuery(`delete from user_rank where type = '${type}'`);
+        let sql = 'INSERT INTO user_rank (username, nickname, avatar, introduction, location, ordernum, crawlingtime, type) VALUES';
+        for (let { username, nickname, avatar, introduction, location, ordernum } of Object.values(userData)) {
+            username = username.replace(/'/g, "\'")
+            nickname = nickname.replace(/'/g, "\'")
+            introduction = introduction.replace(/'/g, "\'")
+            location = location.replace(/'/g, "\'")
+            sql += `('${username}', '${nickname}', '${avatar}', '${introduction}', '${location}', ${ordernum}, NOW(), '${type}'), `;
         }
         sql = sql.substring(0, sql.length - 2);
         let sqlResult = await sqlQuery(sql)
-        console.log(`${type === 'all' ? '' : 'china'} 100 most followers 数据获取完成：`, sqlResult);
+        console.log(`${type} 100 most followers 数据获取完成：`, sqlResult);
     } else {
-        console.log(`${type === 'all' ? '' : 'china'} 100 most followers 请求第${errPage}页数据错误超过50次，跳过此次取值。`);
+        console.log(`${type} 100 most followers 请求第${errPage}页数据错误超过50次，跳过此次取值。`);
     }
 }
 
@@ -83,7 +80,7 @@ async function getUserData(pageIndex, currentOrder, type) {
     try {
         result = await helper.fetch_data_get(reqUrl, reqParams);
     } catch (err) {
-        console.log(`获取${type === 'all' ? '' : 'china'} 100 most followers 的第${pageIndex}页面数据失败.`);
+        console.log(`获取${type} 100 most followers 的第${pageIndex}页面数据失败.`);
         return {
             success: false,
             data: null
@@ -98,7 +95,7 @@ async function getUserData(pageIndex, currentOrder, type) {
         data.push({
             avatar: _this.find('img.avatar').attr('src'),
             username: $userInfo.find('a:first-child').text().replace(/\'/g, '\\\''),
-            nickname: $userInfo.find('span.f4.ml-1').text().replace(/\'/g, '\\\''),
+            nickname: $userInfo.find('div.f4.mt-2').text().replace(/\'/g, '\\\''),
             introduction: $userInfo.find('p.f5.mt-2').text().trim().replace(/\'/g, '\\\'').replace(/\?/g, ''),
             location: $userInfo.find('.user-list-meta').eq(0).text().trim(),
             ordernum: ++currentOrder

@@ -26,6 +26,7 @@ module.exports = {
             "Connection": "keep-alive",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36",
         },
-        pageTotal: 10
+        pageTotal: 10,      // 每页10条数据，共10页
+        pageUserTotal: 2    // 每页50条数据，共2页
     }
 };
